@@ -39,3 +39,11 @@
 ** https://checkoway.net/musings/nix
 
    Sensibly manage the Nix defaults used by =nix-env=, etc.
+
+** https://nixos.org/manual/nixos/stable/#module-services-emacs
+
+   Provision a specific version of Emacs and any modules required.
+
+** https://nixos.wiki/wiki/TexLive
+
+   Integrated this approach to provisioning texlive into =emacs.nix=.

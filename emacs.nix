@@ -46,6 +46,10 @@ in
     #beacon         # ; highlight my cursor when scrolling
     #nameless       # ; hide current package name everywhere in elisp code
   ])
+  ++ (with epkgs; [
+    org
+    # org-ref       # ; Citations
+  ])
   # notmuch is taken from a nixpkgs derivation which contains an Emacs mode.
   ++ [
     #pkgs.notmuch   # From main packages set

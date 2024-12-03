@@ -1,9 +1,23 @@
 let
   pkgs = import <nixpkgs> {};
-  customEmacs = import ./emacs.nix { inherit pkgs; };
+  emacs = import ./emacs.nix { inherit pkgs; };
+  #tex = (pkgs.texlive.combine {
+  #  inherit (pkgs.texlive) scheme-basic
+  #  ;
+  #});
+  tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive) scheme-full
+      dvisvgm dvipng # for preview and export as html
+      wrapfig wrapfig2 amsmath ulem hyperref capt-of;
+      #(setq org-latex-compiler "lualatex")
+      #(setq org-preview-latex-default-process 'dvisvgm)
+  });
+  python = pkgs.python312Full;
+  pythonPackages = pkgs.python312Packages;
 in with pkgs; [  
   # Editors
-  customEmacs
+  emacs
+  tex # texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
   ispell
 
   # Development tools
@@ -14,12 +28,24 @@ in with pkgs; [
   openssh
   screen
 
-  # Python 3 default
-  python312Full
-  python312Packages.pytest
-  python312Packages.tkinter
-  python312Packages.jupyterlab
-  python312Packages.numpy
-  python312Packages.scipy
-  python312Packages.scikitlearn
+  # Python 3 support
+  python
+  (with pythonPackages; [
+    pytest
+    tkinter
+    ipython
+    ipykernel
+    jupyter_core
+    jupyter_client
+    jupyterlab
+    numpy
+    scipy
+    scikitlearn
+    pip
+    pyzmq
+    matplotlib
+  ])
+
+  # Project tools
+  socat
 ]
