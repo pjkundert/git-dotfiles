@@ -18,6 +18,8 @@ in with pkgs; [
   # Editors
   emacs
   tex # texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
+  mermaid-cli
+  ditaa jdk
   ispell
 
   # Development tools

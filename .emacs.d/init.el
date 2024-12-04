@@ -91,7 +91,8 @@
    )
 )
 
-(setq org-ditaa-jar-path "/usr/local/opt/libexec/ditaa-0.11.0-standalone.jar")
+(setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
+(setq org-babel-ditaa-java-cmd "~/.nix-profile/bin/java")
 
 (add-hook 'text-mode-hook 'flyspell-mode)
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
@@ -118,7 +119,7 @@
 
 ;; Mermaid in Org-Mode
 (require 'ob-mermaid)
-(setq ob-mermaid-cli-path "/usr/local/bin/mmdc")
+(setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc")
 
 ;; Shell in Org-Mode
 (require 'ob-shell)
