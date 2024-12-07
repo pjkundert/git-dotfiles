@@ -2,17 +2,42 @@
 
 ** Activating git-dotiles To Manage Your =$HOME=
 
-  To activate, first create the =git-dotfiles= alias:
+  Check out the "bare" (.git directory) of =pjkundert/git-dotfiles=  Git repo to =~/.git-dotfiles=:
+
+  : git checkout --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
+
+  To activate, first create the =git-dotfiles= alias, and configure it to not show untracked files
+  (the rest of the contents of your $HOME directory!):
 
   : alias git-dotfiles='git --git-dir=$HOME/.git-dotfiles --work-tree=$HOME'
-
-  Check out the =pjkundert/git-dotfiles=  Git repo to =~/.git-dotfiles=:
-
-  : git checkout git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
+  : git-dotfiles config --local status.showUntrackedFiles no
 
   See how your current home directory's dot-files configuration compares:
 
   : git-dotfiles status
+
+  If this is a freshly created, you'll probably see that your home directory is probably missing a
+  bunch of =.alias=, =.bashrc=, ... files:
+  : $ git-dotfiles status
+  : On branch master
+  : Changes to be committed:
+  :   (use "git restore --staged <file>..." to unstage)
+  :   deleted:    .alias
+  :   deleted:    .bash_profile
+  : ...  
+
+  So, if you're satisfied, just reset your home directory's dotfiles to the contents of the master
+  branch's =HEAD=, to install all these files:
+
+  : git-dotfiles reset --hard HEAD
+
+  Otherwise, if you have some custom content in some eg. .bashrc files that you want to integrate,
+  you could =stash save= them, reset to the recommended baseline, and then =stash apply= your custom
+  stuff onto the baseline:
+  : git-dotfiles stash save
+  : git-dotfiles reset --hard HEAD
+  : git-dotfiles stash apply
+
 
 ** Use =$HOME/.bash_personal= for Private Configurations
 
