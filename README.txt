@@ -90,12 +90,18 @@ Table of Contents
 2 Nix Enviroment via `nix-env'
 ══════════════════════════════
 
-  A (partial) replacement for `homebrew' is provided by the
-  `$HOME/env.nix' file.  List any desired Nix targets here to have them
-  added to your `$HOME/.nix-profile/bin'.
+  Install Nix:
+  ┌────
+  │ $  sh <(curl -L https://nixos.org/nix/install)
+  └────
+
 
   Use the `nix-env-update' alias to update your system to the current
   set of targets in `env.nix'.
+
+  A (partial) replacement for `homebrew' is provided by the
+  `$HOME/env.nix' file.  List any desired Nix targets here to have them
+  added to your `$HOME/.nix-profile/bin'.
 
 
 3 References
