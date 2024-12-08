@@ -1,9 +1,14 @@
 # Executed for login shells
 #
 # Put things in here that you only want to run at login
+umask 002
 
-if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
 fi
 
 
