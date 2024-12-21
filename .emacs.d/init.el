@@ -67,6 +67,48 @@
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
 
+(require 'cl-lib)
+(require 'org-clock)
+(defun org-dblock-write:weekly (params)
+  (cl-flet ((fmttm (tm) (format-time-string (org-time-stamp-format t t) tm))
+	    (format-hhmm (minutes) 
+              (format "%d:%02d" 
+                      (/ minutes 60)
+                      (mod minutes 60))))
+    (let ((file (or (plist-get params :file) (buffer-file-name)))
+          (start (seconds-to-time
+                  (org-matcher-time (plist-get params :tstart))))
+          (end (seconds-to-time (org-matcher-time (plist-get params :tend)))))
+      (while (time-less-p start end)
+        (let ((next-week (time-add start
+                                   (date-to-time "1970-01-08T00:00Z")))
+              (week-begin (line-beginning-position))
+              (week-minutes 0))
+          (insert "\nWeekly Table from " (fmttm start) "\n")
+          (insert "| Day of Week | Time |\n|-\n")
+          (while (time-less-p start next-week)
+            (let* ((next-day (time-add start (date-to-time "1970-01-02T00:00Z")))
+                   (minutes
+                    (with-current-buffer (find-file-noselect file)
+                      (cadr (org-clock-get-table-data
+                             file
+                             (list :maxlevel 0
+                                   :tstart (fmttm start)
+                                   :tend (fmttm next-day)))))))
+              (insert "|" (format-time-string "%a" start)
+                      "|" (format-hhmm minutes)
+                      "|\n")
+              (org-table-align)
+              (cl-incf week-minutes minutes)
+              (setq start next-day)))
+	  ;; Add weekly total row
+          (when (> week-minutes 0)
+            (insert "|-\n|*Total*|" (format-hhmm week-minutes) "|\n")
+            (org-table-align))
+          (when (equal week-minutes 0)
+            (delete-region week-begin (line-beginning-position))))))))
+
+
 ;; Adjust the files ox-latex removes on LaTeX export; avoid the ToC related ones, .aux and .toc
 ;; - Export twice to generate ToC
 (require 'ox-latex)

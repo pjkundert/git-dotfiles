@@ -9,10 +9,13 @@ Table of Contents
 .. 2. Use `$HOME/.bash_personal' for Private Configurations
 2. Nix Enviroment via `nix-env'
 3. References
-.. 1. <https://atlassian.com/git/tutorials/dotfiles>
-.. 2. <https://checkoway.net/musings/nix>
-.. 3. <https://nixos.org/manual/nixos/stable/#module-services-emacs>
-.. 4. <https://nixos.wiki/wiki/TexLive>
+.. 1. Dot-file Configuration
+..... 1. <https://atlassian.com/git/tutorials/dotfiles>
+.. 2. Nix
+..... 1. <https://nixcademy.com/posts/nix-on-macos/>
+..... 2. <https://checkoway.net/musings/nix>
+..... 3. <https://nixos.org/manual/nixos/stable/#module-services-emacs>
+..... 4. <https://nixos.wiki/wiki/TexLive>
 
 
 1 git-dotfiles: Store `$HOME' dot-files in Git
@@ -107,30 +110,42 @@ Table of Contents
 3 References
 ════════════
 
+3.1 Dot-file Configuration
+──────────────────────────
+
   This implementation was derived from:
 
 
-3.1 <https://atlassian.com/git/tutorials/dotfiles>
-──────────────────────────────────────────────────
+3.1.1 <https://atlassian.com/git/tutorials/dotfiles>
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Provides a way to have a Git managed `$HOME' directory.
 
   • Changed the `git' alias for accessing the Git repo to `git-dotfiles'
 
 
-3.2 <https://checkoway.net/musings/nix>
-───────────────────────────────────────
+3.2 Nix
+───────
+
+3.2.1 <https://nixcademy.com/posts/nix-on-macos/>
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  General Nix functionality on macOS.
+
+
+3.2.2 <https://checkoway.net/musings/nix>
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Sensibly manage the Nix defaults used by `nix-env', etc.
 
 
-3.3 <https://nixos.org/manual/nixos/stable/#module-services-emacs>
-──────────────────────────────────────────────────────────────────
+3.2.3 <https://nixos.org/manual/nixos/stable/#module-services-emacs>
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Provision a specific version of Emacs and any modules required.
 
 
-3.4 <https://nixos.wiki/wiki/TexLive>
-─────────────────────────────────────
+3.2.4 <https://nixos.wiki/wiki/TexLive>
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Integrated this approach to provisioning texlive into `emacs.nix'.

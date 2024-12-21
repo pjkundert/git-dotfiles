@@ -17,7 +17,7 @@ let
 in with pkgs; [  
   # Editors
   emacs
-  tex # texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
+  tex # Huge... texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
   mermaid-cli
   ditaa jdk
   ispell
@@ -29,6 +29,11 @@ in with pkgs; [
   jq
   openssh
   screen
+  multitail
+
+  # Project tools
+  socat
+  hugo
 
   # Python 3 support
   python
@@ -47,7 +52,4 @@ in with pkgs; [
     pyzmq
     matplotlib
   ])
-
-  # Project tools
-  socat
 ]

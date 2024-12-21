@@ -55,22 +55,30 @@
 
 * References
 
-  This implementation was derived from:
+** Dot-file Configuration
 
-** https://atlassian.com/git/tutorials/dotfiles
+   This implementation was derived from:
 
-   Provides a way to have a Git managed =$HOME= directory.
+*** https://atlassian.com/git/tutorials/dotfiles
 
-   - Changed the =git= alias for accessing the Git repo to =git-dotfiles=
+    Provides a way to have a Git managed =$HOME= directory.
 
-** https://checkoway.net/musings/nix
+    - Changed the =git= alias for accessing the Git repo to =git-dotfiles=
 
-   Sensibly manage the Nix defaults used by =nix-env=, etc.
+** Nix
 
-** https://nixos.org/manual/nixos/stable/#module-services-emacs
+*** https://nixcademy.com/posts/nix-on-macos/
 
-   Provision a specific version of Emacs and any modules required.
+    General Nix functionality on macOS.
 
-** https://nixos.wiki/wiki/TexLive
+*** https://checkoway.net/musings/nix
 
-   Integrated this approach to provisioning texlive into =emacs.nix=.
+    Sensibly manage the Nix defaults used by =nix-env=, etc.
+
+*** https://nixos.org/manual/nixos/stable/#module-services-emacs
+
+    Provision a specific version of Emacs and any modules required.
+
+*** https://nixos.wiki/wiki/TexLive
+
+    Integrated this approach to provisioning texlive into =emacs.nix=.
