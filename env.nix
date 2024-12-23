@@ -32,8 +32,11 @@ in with pkgs; [
   multitail
 
   # Project tools
-  socat
-  hugo
+  socat		# for RS-485 serial I/O testing
+  hugo		# for static website generation
+  rustup	# cargo, etc.
+  nodejs	# Javascript development
+  gh		# Github CLI interface
 
   # Python 3 support
   python
