@@ -17,7 +17,7 @@ let
 in with pkgs; [  
   # Editors
   emacs
-  tex # Huge... texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
+#  tex # Huge... texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
   mermaid-cli
   ditaa jdk
   ispell
