@@ -47,8 +47,10 @@ unset COLORTERM
 #export PATH="$HOME/src/holochain-rust/.cargo/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-# End Nix
+for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
+    if [ -f "$script" ]; then
+	. "$script"
+	break
+    fi
+done
+
