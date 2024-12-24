@@ -45,8 +45,15 @@
 
 * Nix Enviroment via =nix-env=
 
-  Install Nix:
-  : $  sh <(curl -L https://nixos.org/nix/install)
+  Install Nix in multi-user mode, load its environment variables, and update its channels according
+  to the supplied =.nix-channels=:
+  : $ sh <(curl -L https://nixos.org/nix/install) --daemon  # on macOS, skip --daemon
+  : $ . .bash_profile
+  : $ nix-shell -p nix-info --run "nix-info -m"
+  : - system: ...
+  : $ nix-channel --update
+  : unpacking 2 channels...
+  : $ nix-env-update  # to install the env.nix packages; uncomment tex for emacs PDF exports!
 
   Use the =nix-env-update= alias to update your system to the current set of targets in =env.nix=.
 

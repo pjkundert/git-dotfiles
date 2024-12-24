@@ -17,7 +17,7 @@ let
 in with pkgs; [  
   # Editors
   emacs
-#  tex # Huge... texlive.combined.scheme-full  # incl. pdflatex, wrapfig.sty, ...
+# tex  # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
   mermaid-cli
   ditaa jdk
   ispell
@@ -37,6 +37,7 @@ in with pkgs; [
   rustup	# cargo, etc.
   nodejs	# Javascript development
   gh		# Github CLI interface
+  wget
 
   # Python 3 support
   python

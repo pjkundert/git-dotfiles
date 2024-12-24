@@ -46,11 +46,11 @@ unset COLORTERM
 # Rust/Cargo development integration
 #export PATH="$HOME/src/holochain-rust/.cargo/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-
-for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
+# Support Nix in multi-user and (optionally) individual installations
+for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
+              "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
     if [ -f "$script" ]; then
 	. "$script"
 	break
     fi
 done
-
