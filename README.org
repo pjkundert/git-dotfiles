@@ -4,7 +4,7 @@
 
   Check out the "bare" (.git directory) of =pjkundert/git-dotfiles=  Git repo to =~/.git-dotfiles=:
 
-  : git checkout --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
+  : git clone --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
 
   To activate, first create the =git-dotfiles= alias, and configure it to not show untracked files
   (the rest of the contents of your $HOME directory!):

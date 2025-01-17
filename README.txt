@@ -28,7 +28,7 @@ Table of Contents
   repo to `~/.git-dotfiles':
 
   ┌────
-  │ git checkout --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
+  │ git clone --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
   └────
 
 
