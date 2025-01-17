@@ -38,6 +38,7 @@ in with pkgs; [
   nodejs	# Javascript development
   gh		# Github CLI interface
   wget
+  diffutils	# GNU diff, etc.
 
   # Python 3 support
   python
