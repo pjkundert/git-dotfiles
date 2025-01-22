@@ -174,6 +174,14 @@
 
 ;; Rust
 ;; - rustup component add rust-analyzer
+
+;; lsp-mode
+;; - disable file-watch (runs out of file descriptors, no matter what you configure)
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.wasm_target\\'")
+  (setq lsp-enable-file-watchers nil)
+  )
+
 (require 'rust-mode)
 (use-package rustic
    :ensure t
@@ -181,8 +189,11 @@
    (setq rustic-format-on-save nil)
    :custom
      (rustic-cargo-use-last-stored-arguments t)
-     (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer")))
+     (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+     (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
+     )
 
+  
 (setq frame-background-mode 'dark)
 
 (desktop-save-mode 1)

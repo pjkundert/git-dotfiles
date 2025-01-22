@@ -2,6 +2,7 @@
 #
 # Put things in here that you only want to run at login
 umask 002
+ulimit -n 25000
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
