@@ -5,10 +5,11 @@ Table of Contents
 ─────────────────
 
 1. git-dotfiles: Store `$HOME' dot-files in Git
-.. 1. Activating git-dotiles To Manage Your `$HOME'
+.. 1. Activating `git-dotiles' (`git.') To Manage `$HOME'
 .. 2. Use `$HOME/.bash_personal' for Private Configurations
-2. Nix Enviroment via `nix-env'
+2. Nix Environment via `nix-env-update' (`nix-env.')
 3. Rust Development
+.. 1. Emacs `rustic' and `lsc-mode' Support
 4. References
 .. 1. Dot-file Configuration
 ..... 1. <https://atlassian.com/git/tutorials/dotfiles>
@@ -22,8 +23,8 @@ Table of Contents
 1 git-dotfiles: Store `$HOME' dot-files in Git
 ══════════════════════════════════════════════
 
-1.1 Activating git-dotiles To Manage Your `$HOME'
-─────────────────────────────────────────────────
+1.1 Activating `git-dotiles' (`git.') To Manage `$HOME'
+───────────────────────────────────────────────────────
 
   Check out the "bare" (.git directory) of `pjkundert/git-dotfiles' Git
   repo to `~/.git-dotfiles':
@@ -89,8 +90,8 @@ Table of Contents
   not be stored in the `git-dotfiles' Git repo.
 
 
-2 Nix Enviroment via `nix-env'
-══════════════════════════════
+2 Nix Environment via `nix-env-update' (`nix-env.')
+═══════════════════════════════════════════════════
 
   First: do NOT install nix from the Apt repositories!  It is broken in
   significant ways, as of Q1 2025.
@@ -109,8 +110,8 @@ Table of Contents
   └────
 
 
-  Use the `nix-env-update' alias to update your system to the current
-  set of targets in `env.nix'.
+  Use the `nix-env-update' alias (or `nix-env.') to update your system
+  to the current set of targets in `env.nix'.
 
   A (partial) replacement for `homebrew' is provided by the
   `$HOME/env.nix' file.  List any desired Nix targets here to have them
@@ -123,6 +124,12 @@ Table of Contents
   You must configure `$HOME/.rustup/settings.toml' to specify
   `default_host_triple' and `default_toolchain' as appropriate for your
   local environment.
+
+
+3.1 Emacs `rustic' and `lsc-mode' Support
+─────────────────────────────────────────
+
+  After `nix-env-update', run `rustup component add rust-analyzer'.
 
 
 4 References
