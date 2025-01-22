@@ -147,8 +147,7 @@
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
  '(package-selected-packages
-   '(org-inline-pdf jupyter gnu-elpa-keyring-update htmlize magit nix-mode rust-mode f s ob-mermaid))
- )
+   '(rustic org-inline-pdf jupyter gnu-elpa-keyring-update htmlize magit nix-mode rust-mode f s ob-mermaid)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -172,6 +171,17 @@
   "Custom `js-mode' behaviours."
   (setq indent-tabs-mode nil))
 (add-hook 'js-mode-hook 'my-js-mode-hook)
+
+;; Rust
+;; - rustup component add rust-analyzer
+(require 'rust-mode)
+(use-package rustic
+   :ensure t
+   :config
+   (setq rustic-format-on-save nil)
+   :custom
+     (rustic-cargo-use-last-stored-arguments t)
+     (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer")))
 
 (setq frame-background-mode 'dark)
 

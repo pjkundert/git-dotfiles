@@ -29,23 +29,14 @@ fi
 # export NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz
 export NIX_PATH="$HOME/.nix-defexpr"
 
-# Nix
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
-  . $HOME/.nix-profile/etc/profile.d/nix.sh; 
-fi # added by Nix installer
-
-# Setting PATH for Python 3.10
-# - Needed to build SLIP-39.app/pkg/dmg
-# The original version is saved in .bash_profile.pysave
-#PATH="/Library/Frameworks/Python.framework/Versions/3.10/bin:${PATH}"
 export PATH
 
 # COLORTERM=truecolor wrecks GNU emacs in screen, at least on macOS
 unset COLORTERM
 
 # Rust/Cargo development integration
-#export PATH="$HOME/src/holochain-rust/.cargo/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+
 # Support Nix in multi-user and (optionally) individual installations
 for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
               "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
@@ -54,3 +45,8 @@ for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
 	break
     fi
 done
+
+# Nix
+#if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
+#  . $HOME/.nix-profile/etc/profile.d/nix.sh; 
+#fi # added by Nix installer

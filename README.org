@@ -3,17 +3,15 @@
 ** Activating git-dotiles To Manage Your =$HOME=
 
   Check out the "bare" (.git directory) of =pjkundert/git-dotfiles=  Git repo to =~/.git-dotfiles=:
-
+  : sudo apt install git
   : git clone --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
 
   To activate, first create the =git-dotfiles= alias, and configure it to not show untracked files
   (the rest of the contents of your $HOME directory!):
-
   : alias git-dotfiles='git --git-dir=$HOME/.git-dotfiles --work-tree=$HOME'
   : git-dotfiles config --local status.showUntrackedFiles no
 
   See how your current home directory's dot-files configuration compares:
-
   : git-dotfiles status
 
   If this is a freshly created, you'll probably see that your home directory is probably missing a
@@ -45,8 +43,12 @@
 
 * Nix Enviroment via =nix-env=
 
+  First: do NOT install nix from the Apt repositories!  It is broken in significant ways, as of
+  Q1 2025.
+
   Install Nix in multi-user mode, load its environment variables, and update its channels according
   to the supplied =.nix-channels=:
+  : $ sudo apt install curl
   : $ sh <(curl -L https://nixos.org/nix/install) --daemon  # on macOS, skip --daemon
   : $ . .bash_profile
   : $ nix-shell -p nix-info --run "nix-info -m"
@@ -59,6 +61,11 @@
 
   A (partial) replacement for =homebrew= is provided by the =$HOME/env.nix= file.  List any
   desired Nix targets here to have them added to your =$HOME/.nix-profile/bin=.
+
+* Rust Development
+
+  You must configure =$HOME/.rustup/settings.toml= to specify =default_host_triple= and
+  =default_toolchain= as appropriate for your local environment.
 
 * References
 

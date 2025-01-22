@@ -8,7 +8,8 @@ Table of Contents
 .. 1. Activating git-dotiles To Manage Your `$HOME'
 .. 2. Use `$HOME/.bash_personal' for Private Configurations
 2. Nix Enviroment via `nix-env'
-3. References
+3. Rust Development
+4. References
 .. 1. Dot-file Configuration
 ..... 1. <https://atlassian.com/git/tutorials/dotfiles>
 .. 2. Nix
@@ -26,8 +27,8 @@ Table of Contents
 
   Check out the "bare" (.git directory) of `pjkundert/git-dotfiles' Git
   repo to `~/.git-dotfiles':
-
   ┌────
+  │ sudo apt install git
   │ git clone --bare git@github.com:pjkundert/git-dotfiles.git .git-dotfiles
   └────
 
@@ -35,7 +36,6 @@ Table of Contents
   To activate, first create the `git-dotfiles' alias, and configure it
   to not show untracked files (the rest of the contents of your $HOME
   directory!):
-
   ┌────
   │ alias git-dotfiles='git --git-dir=$HOME/.git-dotfiles --work-tree=$HOME'
   │ git-dotfiles config --local status.showUntrackedFiles no
@@ -44,7 +44,6 @@ Table of Contents
 
   See how your current home directory's dot-files configuration
   compares:
-
   ┌────
   │ git-dotfiles status
   └────
@@ -93,9 +92,13 @@ Table of Contents
 2 Nix Enviroment via `nix-env'
 ══════════════════════════════
 
+  First: do NOT install nix from the Apt repositories!  It is broken in
+  significant ways, as of Q1 2025.
+
   Install Nix in multi-user mode, load its environment variables, and
   update its channels according to the supplied `.nix-channels':
   ┌────
+  │ $ sudo apt install curl
   │ $ sh <(curl -L https://nixos.org/nix/install) --daemon  # on macOS, skip --daemon
   │ $ . .bash_profile
   │ $ nix-shell -p nix-info --run "nix-info -m"
@@ -114,16 +117,24 @@ Table of Contents
   added to your `$HOME/.nix-profile/bin'.
 
 
-3 References
+3 Rust Development
+══════════════════
+
+  You must configure `$HOME/.rustup/settings.toml' to specify
+  `default_host_triple' and `default_toolchain' as appropriate for your
+  local environment.
+
+
+4 References
 ════════════
 
-3.1 Dot-file Configuration
+4.1 Dot-file Configuration
 ──────────────────────────
 
   This implementation was derived from:
 
 
-3.1.1 <https://atlassian.com/git/tutorials/dotfiles>
+4.1.1 <https://atlassian.com/git/tutorials/dotfiles>
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Provides a way to have a Git managed `$HOME' directory.
@@ -131,28 +142,28 @@ Table of Contents
   • Changed the `git' alias for accessing the Git repo to `git-dotfiles'
 
 
-3.2 Nix
+4.2 Nix
 ───────
 
-3.2.1 <https://nixcademy.com/posts/nix-on-macos/>
+4.2.1 <https://nixcademy.com/posts/nix-on-macos/>
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   General Nix functionality on macOS.
 
 
-3.2.2 <https://checkoway.net/musings/nix>
+4.2.2 <https://checkoway.net/musings/nix>
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Sensibly manage the Nix defaults used by `nix-env', etc.
 
 
-3.2.3 <https://nixos.org/manual/nixos/stable/#module-services-emacs>
+4.2.3 <https://nixos.org/manual/nixos/stable/#module-services-emacs>
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Provision a specific version of Emacs and any modules required.
 
 
-3.2.4 <https://nixos.wiki/wiki/TexLive>
+4.2.4 <https://nixos.wiki/wiki/TexLive>
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
   Integrated this approach to provisioning texlive into `emacs.nix'.

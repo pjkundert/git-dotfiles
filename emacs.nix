@@ -33,6 +33,9 @@ in
   # MELPA stable.
   emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
     magit          # ; Integrate git <C-x g>
+    rust-mode
+    rustic
+    lsp-mode
     #zerodark-theme # ; Nicolas' theme
   ])
   # Two packages (undo-tree and zoom-frm) are taken from MELPA.

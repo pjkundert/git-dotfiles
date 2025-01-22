@@ -1,0 +1,3 @@
+default_host_triple = "aarch64-apple-darwin"
+default_toolchain = "stable-aarch64-apple-darwin"
+version = "12"
