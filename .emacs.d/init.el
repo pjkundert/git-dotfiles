@@ -71,8 +71,8 @@
 (require 'org-clock)
 (defun org-dblock-write:weekly (params)
   (cl-flet ((fmttm (tm) (format-time-string (org-time-stamp-format t t) tm))
-	    (format-hhmm (minutes) 
-              (format "%d:%02d" 
+	    (format-hhmm (minutes)
+              (format "%d:%02d"
                       (/ minutes 60)
                       (mod minutes 60))))
     (let ((file (or (plist-get params :file) (buffer-file-name)))
@@ -172,6 +172,8 @@
   (setq indent-tabs-mode nil))
 (add-hook 'js-mode-hook 'my-js-mode-hook)
 
+(add-hook 'org-mode-hook (lambda () (setq-local indent-tabs-mode nil)))
+
 ;; Rust
 ;; - rustup component add rust-analyzer
 
@@ -190,10 +192,11 @@
    :custom
      (rustic-cargo-use-last-stored-arguments t)
      (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+     (rustic-compile-command "make -C ... nix-test")
      (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
      )
 
-  
+
 (setq frame-background-mode 'dark)
 
 (desktop-save-mode 1)

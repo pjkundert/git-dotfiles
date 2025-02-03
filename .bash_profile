@@ -12,6 +12,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Nix integration: run nix-env -irf ~/env.nix
 # - NIX_PATH references ~/.nix-defexpr, eg:
@@ -51,3 +52,6 @@ done
 #if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
 #  . $HOME/.nix-profile/etc/profile.d/nix.sh; 
 #fi # added by Nix installer
+
+# Added by Windsurf
+export PATH="/Users/perry/.codeium/windsurf/bin:$PATH"

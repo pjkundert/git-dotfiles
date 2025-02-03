@@ -17,10 +17,11 @@ let
 in with pkgs; [  
   # Editors
   emacs
-# tex  # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
   mermaid-cli
   ditaa jdk
   ispell
+  codeium       # codeium_server_process for Emacs codeium bindings
+# tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
 
   # Development tools
   cacert
@@ -39,6 +40,9 @@ in with pkgs; [
   gh		# Github CLI interface
   wget
   diffutils	# GNU diff, etc.
+
+  # AI
+  ollama	# eg. Run in 2 terminals: $ ollama serve, $ ollama run deepseek-r1:8b
 
   # Python 3 support
   python

@@ -52,6 +52,7 @@ in
   ++ (with epkgs; [
     org
     # org-ref       # ; Citations
+    codeium         # ; Emacs bindings for codeium server
   ])
   # notmuch is taken from a nixpkgs derivation which contains an Emacs mode.
   ++ [
