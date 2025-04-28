@@ -1,2 +1,1 @@
-https://nixos.org/channels/nixpkgs-unstable nixpkgs
-https://nixos.org/channels/nixos-unstable unstable
+https://github.com/NixOS/nixpkgs/archive/release-24.11.tar.gz nixpkgs

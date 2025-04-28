@@ -1,6 +1,7 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./emacs.nix { inherit pkgs; };
+  uemacs = import ./uemacs.nix { inherit pkgs; };
   #tex = (pkgs.texlive.combine {
   #  inherit (pkgs.texlive) scheme-basic
   #  ;
@@ -15,31 +16,38 @@ let
   python = pkgs.python312Full;
   pythonPackages = pkgs.python312Packages;
 in with pkgs; [  
-  # Editors
+  # Editors and basic dependencies
+  uemacs
   emacs
-  mermaid-cli
-  ditaa jdk
   ispell
-  codeium       # codeium_server_process for Emacs codeium bindings
-# tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
+  #codeium       # codeium_server_process for Emacs codeium bindings
+
+  # Emacs PDF generation dependencies
+  #mermaid-cli   # Requires nodejs
+  #ditaa jdk     # Requires nodejs and java
+  #tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
 
   # Development tools
   cacert
-  git
+  git # git-filter-repo
   gnumake
+  cmake
   jq
   openssh
   screen
   multitail
+  pstree
 
   # Project tools
   socat		# for RS-485 serial I/O testing
   hugo		# for static website generation
   rustup	# cargo, etc.
-  nodejs	# Javascript development
   gh		# Github CLI interface
   wget
   diffutils	# GNU diff, etc.
+
+  # Javascript tools
+  #nodejs	# Javascript development
 
   # AI
   ollama	# eg. Run in 2 terminals: $ ollama serve, $ ollama run deepseek-r1:8b
@@ -51,9 +59,9 @@ in with pkgs; [
     tkinter
     ipython
     ipykernel
-    jupyter_core
-    jupyter_client
-    jupyterlab
+    #jupyter_core
+    #jupyter_client
+    #jupyterlab
     numpy
     scipy
     scikitlearn
