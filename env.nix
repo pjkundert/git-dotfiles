@@ -25,7 +25,7 @@ in with pkgs; [
   # Emacs PDF generation dependencies
   #mermaid-cli   # Requires nodejs
   #ditaa jdk     # Requires nodejs and java
-  #tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
+  tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
 
   # Development tools
   cacert
@@ -45,9 +45,10 @@ in with pkgs; [
   gh		# Github CLI interface
   wget
   diffutils	# GNU diff, etc.
+  wakeonlan
 
   # Javascript tools
-  #nodejs	# Javascript development
+  nodejs	# Javascript development
 
   # AI
   ollama	# eg. Run in 2 terminals: $ ollama serve, $ ollama run deepseek-r1:8b
