@@ -23,8 +23,8 @@ in with pkgs; [
   #codeium       # codeium_server_process for Emacs codeium bindings
 
   # Emacs PDF generation dependencies
-  #mermaid-cli   # Requires nodejs
-  #ditaa jdk     # Requires nodejs and java
+  mermaid-cli   # Requires nodejs
+  ditaa jdk     # Requires nodejs and java
   tex           # Huge! Use for PDF export in emacs # incl. pdflatex, wrapfig.sty, ...
 
   # Development tools
@@ -60,9 +60,9 @@ in with pkgs; [
     tkinter
     ipython
     ipykernel
-    #jupyter_core
-    #jupyter_client
-    #jupyterlab
+    jupyter_core
+    jupyter_client
+    jupyterlab
     numpy
     scipy
     scikitlearn
