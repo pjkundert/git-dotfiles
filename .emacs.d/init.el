@@ -1,13 +1,21 @@
-
-(menu-bar-mode -1)
-
+;; Make use-package available
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; All modes
+(menu-bar-mode -1)
+(global-auto-revert-mode t)
+(delete-selection-mode 1)
+(desktop-save-mode 1)
+
+(setq frame-background-mode 'dark)
 
 ;; Alternatives for <C-return>, <S-return> and <C-S-return>, which are
 ;; unavailable on OS-X.  The following bindings cannot be triggered
@@ -26,9 +34,9 @@
 (define-key key-translation-map (kbd "ESC [ S R")   (kbd "<S-return>"))
 (define-key key-translation-map (kbd "ESC [ C S R") (kbd "<C-S-return>"))
 
+
 ;; Historically, C-SPC has been set-mark; use ESC-SPC or M-SPC to expand-region
 (global-set-key (kbd "C-@")             'set-mark-command)
-(global-set-key (kbd "<M-space>")	'er/expand-region)
 
 ;; Navigation between multiframe-windows
 (global-set-key (kbd "C-x p")           'previous-multiframe-window )
@@ -44,31 +52,31 @@
 (global-set-key (kbd "C-M-k")           'kill-rectangle)        ;; also C-x r k
 (global-set-key (kbd "C-M-y")           'yank-rectangle)        ;; also C-x r y
 
-(defun my-c-mode-common-hook ()
-  ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
-  (c-set-offset 'substatement-open 0)
-  ;; other customizations can go here
+(use-package expand-region
+  :bind (("<M-space>" . er/expand-region)))
 
-  (setq c++-tab-always-indent t)
-  (setq c-basic-offset 4)                  ;; Default is 2
-  (setq c-indent-level 4)                  ;; Default is 2
 
-  ;;(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
-  (setq tab-width 8)
-  (setq indent-tabs-mode t)                ;; use spaces only if nil
-  )
+(use-package flyspell
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode)))
 
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;; org-mode configuration
+(use-package org
+  :config
+  (setq org-src-fontify-natively t
+        org-confirm-babel-evaluate nil)
+  (add-hook 'org-mode-hook (lambda () (setq-local indent-tabs-mode nil))))
 
-(global-auto-revert-mode t)
+(use-package org-clock :after org :ensure nil)
+;; Adjust the files ox-latex removes on LaTeX export; avoid the ToC related ones, .aux and .toc
+;; - Export twice to generate ToC
+(use-package ox-latex :after org :ensure nil
+  :config
+  (setq org-latex-logfiles-extensions
+        '("bcf" "blg" "fdb_latexmk" "fls" "figlist" "idx"
+          "log" "nav" "out" "ptc" "run.xml" "snm" "vrb" "xdv"))
+  (setq org-latex-remove-logfiles t))
 
-;; Bring in org-mode and configure
-(require 'org)
-(setq org-src-fontify-natively t)
-(setq org-confirm-babel-evaluate nil)
-
-(require 'cl-lib)
-(require 'org-clock)
 (defun org-dblock-write:weekly (params)
   (cl-flet ((fmttm (tm) (format-time-string (org-time-stamp-format t t) tm))
 	    (format-hhmm (minutes)
@@ -109,35 +117,81 @@
             (delete-region week-begin (line-beginning-position))))))))
 
 
-;; Adjust the files ox-latex removes on LaTeX export; avoid the ToC related ones, .aux and .toc
-;; - Export twice to generate ToC
-(require 'ox-latex)
-(setq org-latex-logfiles-extensions (quote ("bcf" "blg" "fdb_latexmk" "fls" "figlist" "idx" "log" "nav" "out" "ptc" "run.xml" "snm" "vrb" "xdv")))
-(setq org-latex-remove-logfiles t)
+;; org-mode babel configuration
+(use-package ob-mermaid
+  :after org
+  :custom (ob-mermaid-cli-path "~/.nix-profile/bin/mmdc"))
+(use-package ob-shell :after org :ensure nil)
+(use-package jupyter :defer t)
+(use-package ob-jupyter :after org :ensure jupyter)
 
-;;(setq python-shell-interpreter "/usr/local/bin/python3")
-;; Use ipython as default python interpreter for emacs-jupyter
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
-
-;;(setq org-babel-python-command "/usr/local/bin/ipython")
-
-(require 'jupyter)
 (org-babel-do-load-languages
  'org-babel-load-languages
- '(
-   (ditaa . t)
+ '((ditaa . t)
    (shell . t)
    (python . t)
-   (jupyter . t)
-   )
-)
+   (jupyter . t)))
 
 (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
 (setq org-babel-ditaa-java-cmd "~/.nix-profile/bin/java")
 
-(add-hook 'text-mode-hook 'flyspell-mode)
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;; Other mode configurations
+(use-package htmlize :defer t)
+(use-package magit :defer t)
+(use-package nix-mode :mode "\\.nix\\'")
+(use-package rust-mode :defer t)
+(use-package rustic
+  :init (setq rustic-format-on-save nil)
+  :custom
+  (rustic-cargo-use-last-stored-arguments t)
+  (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+  (rustic-compile-command "make -C ... nix-test")
+  (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
+  )
+
+(use-package lsp-mode
+  :defer t
+  :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.wasm_target\\'")
+  (setq lsp-enable-file-watchers nil))
+
+(use-package ansi-color
+  :ensure nil
+  :config
+  (defun colorize-compilation-buffer ()
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region (point-min) (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer))
+
+(load-theme 'wheatgrass t)
+
+;; C-mode stuff
+(defun my-c-mode-common-hook ()
+  ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
+  (c-set-offset 'substatement-open 0)
+  ;; other customizations can go here
+
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)                  ;; Default is 2
+  (setq c-indent-level 4)                  ;; Default is 2
+
+  ;;(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+  (setq tab-width 8)
+  (setq indent-tabs-mode t)                ;; use spaces only if nil
+  )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; Javascript Mode.  2-space indent, use spaces only
+(setq js-indent-level 2)
+(defun my-js-mode-hook ()
+  "Custom `js-mode' behaviours."
+  (setq indent-tabs-mode nil))
+(add-hook 'js-mode-hook 'my-js-mode-hook)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -154,55 +208,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; replace selected text
-(delete-selection-mode 1)
-
-;; Mermaid in Org-Mode
-(require 'ob-mermaid)
-(setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc")
-
-;; Shell in Org-Mode
-(require 'ob-shell)
-
-;; Javascript Mode.  2-space indent, use spaces only
-(setq js-indent-level 2)
-(defun my-js-mode-hook ()
-  "Custom `js-mode' behaviours."
-  (setq indent-tabs-mode nil))
-(add-hook 'js-mode-hook 'my-js-mode-hook)
-
-(add-hook 'org-mode-hook (lambda () (setq-local indent-tabs-mode nil)))
-
-;; Rust
-;; - rustup component add rust-analyzer
-
-;; lsp-mode
-;; - disable file-watch (runs out of file descriptors, no matter what you configure)
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.wasm_target\\'")
-  (setq lsp-enable-file-watchers nil)
-  )
-
-(require 'rust-mode)
-(use-package rustic
-   :ensure t
-   :config
-   (setq rustic-format-on-save nil)
-   :custom
-     (rustic-cargo-use-last-stored-arguments t)
-     (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
-     (rustic-compile-command "make -C ... nix-test")
-     (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
-     )
-
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (let ((inhibit-read-only t))
-    (ansi-color-apply-on-region (point-min) (point-max))))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-
-
-(setq frame-background-mode 'dark)
-
-(desktop-save-mode 1)
