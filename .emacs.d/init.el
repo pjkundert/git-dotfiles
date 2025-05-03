@@ -52,8 +52,8 @@
 (global-set-key (kbd "C-M-k")           'kill-rectangle)        ;; also C-x r k
 (global-set-key (kbd "C-M-y")           'yank-rectangle)        ;; also C-x r y
 
-(use-package expand-region
-  :bind (("<M-space>" . er/expand-region)))
+;(use-package expand-region
+;  :bind (("<M-space>" . er/expand-region)))
 
 
 (use-package flyspell
@@ -200,8 +200,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
- '(package-selected-packages
-   '(rustic org-inline-pdf jupyter gnu-elpa-keyring-update htmlize magit nix-mode rust-mode f s ob-mermaid)))
+ '(package-selected-packages nil))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
