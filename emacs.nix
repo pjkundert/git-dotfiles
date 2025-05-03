@@ -41,6 +41,7 @@ in
   # Two packages (undo-tree and zoom-frm) are taken from MELPA.
   ++ (with epkgs.melpaPackages; [
     zmq
+    company
     #undo-tree      # ; <C-x u> to show the undo tree
     #zoom-frm       # ; increase/decrease font size for all buffers %lt;C-x C-+>
   ])

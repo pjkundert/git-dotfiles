@@ -139,6 +139,11 @@
 
 
 ;; Other mode configurations
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode 1))
+
 (use-package htmlize :defer t)
 (use-package magit :defer t)
 (use-package nix-mode :mode "\\.nix\\'")
