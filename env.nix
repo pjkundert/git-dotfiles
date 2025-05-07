@@ -17,6 +17,8 @@ let
   pythonPackages = pkgs.python312Packages;
 in with pkgs; [  
   # Editors and basic dependencies
+  bash
+  bash-completion
   uemacs
   emacs
   ispell

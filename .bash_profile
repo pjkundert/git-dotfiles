@@ -39,6 +39,11 @@ unset COLORTERM
 # Rust/Cargo development integration
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Add Docker CLI if installed (Docker Desktop on macOS is unreliable at providing $HOME/.docker/bin)
+if [[ -d "/Applications/Docker.app/Contents/Resources/bin/" ]]; then 
+    export PATH="/Applications/Docker.app/Contents/Resources/bin/:$PATH";
+fi
+
 # Support Nix in multi-user and (optionally) individual installations
 for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
               "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
@@ -47,6 +52,14 @@ for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
 	break
     fi
 done
+
+# If we're running a version of bash capable of it, use bash-completions.  Otherwise, prompt
+# to change shell to Nix environment supplied version.
+if [[ -z "${BASH_VERSION%%5*}" && -r "$HOME/.nix-profile/share/bash-completion/bash_completion" ]]; then
+    . $HOME/.nix-profile/share/bash-completion/bash_completion
+else
+    echo "Not loading bash-completions; chsh -s $HOME/.nix-profile/bin/bash # (add to /etc/shell first)"
+fi
 
 # Nix
 #if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
