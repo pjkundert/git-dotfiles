@@ -1,11 +1,8 @@
 let
   pkgs = import <nixpkgs> {};
-  emacs = import ./emacs.nix { inherit pkgs; };
-  uemacs = import ./uemacs.nix { inherit pkgs; };
-  #tex = (pkgs.texlive.combine {
-  #  inherit (pkgs.texlive) scheme-basic
-  #  ;
-  #});
+  emacs = import ./env-emacs.nix { inherit pkgs; };
+  uemacs = import ./env-uemacs.nix { inherit pkgs; };
+  libmsquic = import ./env-libmsquic.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng # for preview and export as html
@@ -51,6 +48,11 @@ in with pkgs; [
 
   # Javascript tools
   nodejs	# Javascript development
+
+  # C# Tools, QUIC protocol implementation
+  dotnet-sdk_8
+  powershell
+  libmsquic
 
   # AI
   ollama	# eg. Run in 2 terminals: $ ollama serve, $ ollama run deepseek-r1:8b

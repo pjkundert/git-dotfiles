@@ -40,8 +40,8 @@ unset COLORTERM
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # Add Docker CLI if installed (Docker Desktop on macOS is unreliable at providing $HOME/.docker/bin)
-if [[ -d "/Applications/Docker.app/Contents/Resources/bin/" ]]; then 
-    export PATH="/Applications/Docker.app/Contents/Resources/bin/:$PATH";
+if [[ -d "/Applications/Docker.app/Contents/Resources" ]]; then 
+    export PATH="/Applications/Docker.app/Contents/Resources/bin/:/Applications/Docker.app/Contents/Resources/cli-plugins/:$PATH";
 fi
 
 # Support Nix in multi-user and (optionally) individual installations
