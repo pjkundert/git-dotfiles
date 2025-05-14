@@ -1,6 +1,6 @@
 { pkgs ? import <nixpkgs> {} }:
 
-pkgs.stdenv.mkDerivation {
+pkgs.gccStdenv.mkDerivation {
   pname = "uemacs";
   version = "4.0-unstable-2018-07-19";
   src = pkgs.fetchgit {
@@ -10,7 +10,6 @@ pkgs.stdenv.mkDerivation {
   };
   nativeBuildInputs = [
     pkgs.ncurses
-    pkgs.gcc
   ];
   postPatch = ''
     substituteInPlace Makefile --replace "lcurses" "lncurses"
@@ -25,7 +24,7 @@ pkgs.stdenv.mkDerivation {
   meta = with pkgs.lib; {
     description = "Linus Torvalds's random version of microemacs with his personal modifications";
     homepage = "https://git.kernel.org/pub/scm/editors/uemacs/uemacs.git/about/";
-    platforms = platforms.linux ++ platforms.darwin;  # Added Darwin/macOS support
+    platforms = platforms.all;
     # maintainers = with maintainers; [ networkexception ];
     mainProgram = "em";
     # MicroEMACS 3.9 can be copied and distributed freely for any
