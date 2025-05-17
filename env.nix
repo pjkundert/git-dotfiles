@@ -1,7 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./env-emacs.nix { inherit pkgs; };
-  uemacs = import ./env-uemacs.nix { inherit pkgs; };
   libmsquic = import ./env-libmsquic.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
@@ -45,6 +44,7 @@ in with pkgs; [
   wget
   diffutils	# GNU diff, etc.
   wakeonlan
+  cloudflared
 
   # Javascript tools
   nodejs	# Javascript development
