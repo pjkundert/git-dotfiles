@@ -1,7 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./env-emacs.nix { inherit pkgs; };
-  libmsquic = import ./env-libmsquic.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng # for preview and export as html
