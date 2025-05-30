@@ -148,6 +148,7 @@
 (use-package magit :defer t)
 (use-package nix-mode :mode "\\.nix\\'")
 (use-package rust-mode :defer t)
+(use-package powershell :defer t)
 (use-package rustic
   :init (setq rustic-format-on-save nil)
   :custom
@@ -205,7 +206,9 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(codeium company htmlize jupyter lsp-mode magit nix-mode ob-mermaid org-inline-pdf powershell
+	     rustic)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

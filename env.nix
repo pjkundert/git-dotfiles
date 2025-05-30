@@ -59,18 +59,19 @@ in with pkgs; [
   # Python 3 support
   python
   (with pythonPackages; [
-    pytest
-    tkinter
-    ipython
     ipykernel
-    jupyter_core
+    ipython
     jupyter_client
+    jupyter_core
     jupyterlab
-    numpy
-    scipy
-    scikitlearn
-    pip
-    pyzmq
     matplotlib
+    numpy
+    pip
+    pytest
+    pyzmq
+    scikitlearn
+    scipy
+    tkinter
+    trezor
   ])
 ]
