@@ -68,3 +68,7 @@ fi
 
 # Added by Windsurf
 export PATH="/Users/perry/.codeium/windsurf/bin:$PATH"
+
+# Node development path for npm install -g ... installations
+
+export PATH=$HOME/.node_global/bin:$PATH
