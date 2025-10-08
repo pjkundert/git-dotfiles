@@ -127,12 +127,18 @@
 
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
+
+(use-package ob-go
+  :ensure t)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((ditaa . t)
    (shell . t)
    (python . t)
-   (jupyter . t)))
+   (jupyter . t)
+   (go . t)
+   ))
 
 (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
 (setq org-babel-ditaa-java-cmd "~/.nix-profile/bin/java")
@@ -206,9 +212,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(codeium company htmlize jupyter lsp-mode magit nix-mode ob-mermaid org-inline-pdf powershell
-	     rustic)))
+   '(codeium company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf
+	     powershell rustic)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

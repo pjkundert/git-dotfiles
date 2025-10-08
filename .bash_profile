@@ -29,7 +29,8 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 # - NIX_PATH references ~/.nix-defexpr
 # - ~/.nix-defexpr contains eg. 
 # export NIX_PATH=nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz
-export NIX_PATH="$HOME/.nix-defexpr"
+# export NIX_PATH="$HOME/.nix-defexpr"
+export NIX_PATH="$HOME/.nix-defexpr/channels/nixpkgs"
 
 export PATH
 
@@ -70,5 +71,7 @@ fi
 export PATH="/Users/perry/.codeium/windsurf/bin:$PATH"
 
 # Node development path for npm install -g ... installations
-
 export PATH=$HOME/.node_global/bin:$PATH
+
+# Puppeteer/mermaid-cli: Use chromium from Nix profile
+export PUPPETEER_EXECUTABLE_PATH=$HOME/.nix-profile/bin/google-chrome-stable

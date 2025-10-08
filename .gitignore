@@ -1,4 +1,5 @@
 *~
+\#*
 .DS_Store
 .\#*
 *.pyc
@@ -11,3 +12,6 @@
 /.emacs.d/.emacs.desktop.lock
 /.emacs.d/tramp
 .emacs.d/.lsp-session-*
+.claude/
+CLAUDE.md
+
