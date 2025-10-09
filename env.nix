@@ -1,7 +1,7 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./env-emacs.nix { inherit pkgs; };
-  ollama = import ./env-ollama.nix { inherit pkgs; };
+  #ollama = import ./env-ollama.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng # for preview and export as html
