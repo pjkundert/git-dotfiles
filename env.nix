@@ -57,26 +57,27 @@ in with pkgs; [
   #libmsquic
 
   # AI
-  ollama        # Pinned version from env-ollama.nix
+  ollama
 
   # Python 3 support
   uv
-  python
-  (with pythonPackages; [
+  (python.withPackages (ps: with ps; [
     ipykernel
     ipython
-    jupyter_client
-    jupyter_core
-    jupyterlab
+    # jupyter_client
+    # jupyter_core
+    # jupyterlab
     markdown
     matplotlib
     numpy
+    pandas
     pip
     pytest
     pyzmq
     scikitlearn
     scipy
+    tabulate
     tkinter
     trezor
-  ])
+  ]))
 ]
