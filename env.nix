@@ -9,8 +9,7 @@ let
       #(setq org-latex-compiler "lualatex")
       #(setq org-preview-latex-default-process 'dvisvgm)
   });
-  python = pkgs.python312Full;
-  pythonPackages = pkgs.python312Packages;
+
 in with pkgs; [  
   # Editors and basic dependencies
   bash
@@ -31,7 +30,7 @@ in with pkgs; [
   git # git-filter-repo
   gnumake
   cmake
-  jq
+  jq yq
   openssh
   screen
   multitail
@@ -46,6 +45,7 @@ in with pkgs; [
   diffutils     # GNU diff, etc.
   wakeonlan
   cloudflared
+  imagemagick   # for image conversion (SVG to PNG, etc.)
 
   # Javascript tools; Claude code, etc.
   nodejs_20     # Not a bleeding-edge version
@@ -61,7 +61,7 @@ in with pkgs; [
 
   # Python 3 support
   uv
-  (python.withPackages (ps: with ps; [
+  (python3.withPackages (ps: with ps; [
     ipykernel
     ipython
     # jupyter_client
@@ -69,12 +69,13 @@ in with pkgs; [
     # jupyterlab
     markdown
     matplotlib
+    plotly
     numpy
     pandas
     pip
     pytest
     pyzmq
-    scikitlearn
+    scikit-learn
     scipy
     tabulate
     tkinter

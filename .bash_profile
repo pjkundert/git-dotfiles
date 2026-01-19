@@ -37,6 +37,17 @@ export PATH
 # COLORTERM=truecolor wrecks GNU emacs in screen, at least on macOS
 unset COLORTERM
 
+# Add the default xcode command-line stuff; early, so overridden by anything Nix-supplied
+XCODE_PATH=$(xcode-select -p)
+if [ -n "${XCODE_PATH}" ]; then
+    export PATH="${XCODE_PATH}/usr/bin:$PATH"
+fi
+
+# Setting PATH for Python 3.13
+# The original version is saved in .bash_profile.pysave
+export PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin:${PATH}"
+
+
 # Rust/Cargo development integration
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -66,9 +77,6 @@ fi
 #if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then 
 #  . $HOME/.nix-profile/etc/profile.d/nix.sh; 
 #fi # added by Nix installer
-
-# Added by Windsurf
-export PATH="/Users/perry/.codeium/windsurf/bin:$PATH"
 
 # Node development path for npm install -g ... installations
 export PATH=$HOME/.node_global/bin:$PATH
