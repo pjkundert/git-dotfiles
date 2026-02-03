@@ -198,12 +198,23 @@
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; Javascript Mode.  2-space indent, use spaces only
-(setq js-indent-level 2)
+(setq js-indent-level 4)
 (defun my-js-mode-hook ()
   "Custom `js-mode' behaviours."
   (setq indent-tabs-mode nil))
 (add-hook 'js-mode-hook 'my-js-mode-hook)
 
+
+;;(use-package org-re-reveal :defer t)
+;;(setq org-re-reveal-root "file:///d:/reveal.js")
+
+;; (use-package org-re-reveal
+;;   :ensure t
+;;   :config
+;;   (setq org-re-reveal-root "file:///Users/perry/src/reveal.js"))
+
+(require 'org-re-reveal)
+(setq org-re-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -215,7 +226,7 @@
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
    '(codeium company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf
-	     powershell rustic)))
+	     org-re-reveal rustic)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

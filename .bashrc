@@ -132,3 +132,4 @@ source ~/.git-prompt.sh && PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 
 export PATH="$PATH:/usr/local/ignition"
 alias ignition="/usr/local/ignition/ignition.sh"
+export PATH="$HOME/.local/bin:$PATH"

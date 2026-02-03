@@ -42,6 +42,7 @@ in
   ++ (with epkgs.melpaPackages; [
     zmq
     company
+    #org-re-reveal  # ; old version; need 2026...
     #undo-tree      # ; <C-x u> to show the undo tree
     #zoom-frm       # ; increase/decrease font size for all buffers %lt;C-x C-+>
   ])
