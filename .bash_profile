@@ -38,9 +38,11 @@ export PATH
 unset COLORTERM
 
 # Add the default xcode command-line stuff; early, so overridden by anything Nix-supplied
-XCODE_PATH=$(xcode-select -p)
-if [ -n "${XCODE_PATH}" ]; then
-    export PATH="${XCODE_PATH}/usr/bin:$PATH"
+if [ "S( uname -s )" == "Darwin" ]; then
+    XCODE_PATH=$(xcode-select -p)
+    if [ -n "${XCODE_PATH}" ]; then
+        export PATH="${XCODE_PATH}/usr/bin:$PATH"
+    fi
 fi
 
 # Setting PATH for Python 3.13
