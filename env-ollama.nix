@@ -15,8 +15,11 @@ let
     owner = "NixOS";
     repo = "nixpkgs";
     # This revision contains ollama 0.14.1 - you may need to find the exact commit
-    rev = "656658d2112fe9b1b6df2500f88a7f90a5873df3";
-    sha256 = "sha256-K2UOxyWbcfi7ZRIvN5u0DcFR3WuOm2Yi2U+gYRGScHE=";
+    #rev = "656658d2112fe9b1b6df2500f88a7f90a5873df3";
+    #sha256 = "sha256-K2UOxyWbcfi7ZRIvN5u0DcFR3WuOm2Yi2U+gYRGScHE=";
+    # This revision contains ollama 0.15.6
+    rev = "d782a356d68871bfb110f4404bf585700cd0435c";
+    sha256 = "sha256-3mt9SC4t9ysGINMByFonno1kPnp3bMJ8HQhhjRv9i5M=";
   }) {};
 in
   ollamaPkgs.ollama

@@ -80,5 +80,6 @@ in with pkgs; [
     tabulate
     tkinter
     trezor
+    pyyaml
   ]))
 ]

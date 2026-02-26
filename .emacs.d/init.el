@@ -2,12 +2,32 @@
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/"))
-(package-initialize) ;; You might already have this line
+
+;;(package-initialize) ;; You might already have this line
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+
+;; Enable org-re-reveal via emacs-reveal.  Provides preferred paths to eg. org-mode, ...
+(add-to-list 'load-path "~/src/emacs-reveal")
+(require 'emacs-reveal)
+
+;; Alternatively, install org-re-reveal from MELPA and invoke locally (lacks TTS config)
+;; (use-package approach doesn't work?)
+
+;; (use-package org-re-reveal :defer t)
+;; (setq org-re-reveal-root "file:///d:/reveal.js")
+
+;; (use-package org-re-reveal
+;;   :ensure t
+;;   :config
+;;   (setq org-re-reveal-root "file:///Users/perry/src/reveal.js"))
+
+;;(require 'org-re-reveal)
+;;(setq org-re-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
 ;; All modes
 (menu-bar-mode -1)
@@ -155,14 +175,14 @@
 (use-package nix-mode :mode "\\.nix\\'")
 (use-package rust-mode :defer t)
 (use-package powershell :defer t)
-(use-package rustic
-  :init (setq rustic-format-on-save nil)
-  :custom
-  (rustic-cargo-use-last-stored-arguments t)
-  (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
-  (rustic-compile-command "make -C ... nix-test")
-  (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
-  )
+;; (use-package rustic
+;;   :init (setq rustic-format-on-save nil)
+;;   :custom
+;;   (rustic-cargo-use-last-stored-arguments t)
+;;   (rustic-analyzer-command '("rustup" "run" "stable" "rust-analyzer"))
+;;   (rustic-compile-command "make -C ... nix-test")
+;;   (lsp-rust-analyzer-exclude-dirs ["node_modules/**", "target/**", "/nix/**", ".wasm_target/**" ])
+;;   )
 
 (use-package lsp-mode
   :defer t
@@ -205,16 +225,7 @@
 (add-hook 'js-mode-hook 'my-js-mode-hook)
 
 
-;;(use-package org-re-reveal :defer t)
-;;(setq org-re-reveal-root "file:///d:/reveal.js")
 
-;; (use-package org-re-reveal
-;;   :ensure t
-;;   :config
-;;   (setq org-re-reveal-root "file:///Users/perry/src/reveal.js"))
-
-(require 'org-re-reveal)
-(setq org-re-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -223,10 +234,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
- '(org-export-backends '(ascii html icalendar latex md odt))
+ '(org-safe-remote-resources
+   '("\\`https://images\\.squarespace-cdn\\.com/content/v1/672b6c56614b43553d18558a/a3db695b-8a96-40a2-88c1-cdb2a5a7b8cb/vantage-engineering_logo_3-colour_RGB\\.png\\'"))
  '(package-selected-packages
-   '(codeium company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf
-	     org-re-reveal rustic)))
+   '(company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -234,3 +245,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Load ox-md (not in org-export-backends defaults); avoid using customize for
+;; org-export-backends, whose :set function filters org-export-registered-backends.
+(use-package ox-md :after org :ensure nil)
+
