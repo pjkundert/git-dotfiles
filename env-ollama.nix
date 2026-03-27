@@ -1,25 +1,22 @@
 /*
-This is a nix expression to pin Ollama at a specific working version (0.10.0).
-The current nixpkgs version has a broken Ollama package, so we pin to a 
-specific nixpkgs revision that contains the working version.
+Pin Ollama and llama-cpp to a specific nixpkgs revision.
 
 To use this, import it in your env.nix file:
-  ollama = import ./env-ollama.nix { inherit pkgs; };
+  llamas = import ./env-ollama.nix { inherit pkgs; };
 */
 
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  # Pin to nixpkgs revision containing working Ollama 0.10.0
+  # nixpkgs-unstable 2026-03-05: ollama 0.17.4
   ollamaPkgs = import (pkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    # This revision contains ollama 0.14.1 - you may need to find the exact commit
-    #rev = "656658d2112fe9b1b6df2500f88a7f90a5873df3";
-    #sha256 = "sha256-K2UOxyWbcfi7ZRIvN5u0DcFR3WuOm2Yi2U+gYRGScHE=";
-    # This revision contains ollama 0.15.6
-    rev = "d782a356d68871bfb110f4404bf585700cd0435c";
-    sha256 = "sha256-3mt9SC4t9ysGINMByFonno1kPnp3bMJ8HQhhjRv9i5M=";
+    rev = "917fec990948658ef1ccd07cef2a1ef060786846";
+    sha256 = "sha256-au/m3+EuBLoSzWUCb64a/MZq6QUtOV8oC0D9tY2scPQ=";
   }) {};
-in
+
+in [
   ollamaPkgs.ollama
+  ollamaPkgs.llama-cpp
+]

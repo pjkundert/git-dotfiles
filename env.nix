@@ -1,7 +1,7 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./env-emacs.nix { inherit pkgs; };
-  ollama = import ./env-ollama.nix { inherit pkgs; };
+  llamas = import ./env-ollama.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng # for preview and export as html
@@ -27,7 +27,9 @@ in with pkgs; [
 
   # Development tools
   cacert
-  git # git-filter-repo
+  git
+  #gitSVN subversion svn2git
+  git-credential-manager # git-filter-repo
   gnumake
   cmake
   jq yq
@@ -45,7 +47,13 @@ in with pkgs; [
   diffutils     # GNU diff, etc.
   wakeonlan
   cloudflared
+
+  # Image manipulation
   imagemagick   # for image conversion (SVG to PNG, etc.)
+  poppler_utils # pdftoppm — PDF page rendering (used by Claude Code)
+  poppler
+  ffmpeg
+  ghostscript
 
   # Javascript tools; Claude code, etc.
   nodejs_20     # Not a bleeding-edge version
@@ -55,9 +63,6 @@ in with pkgs; [
   #dotnet-sdk_8
   #powershell
   #libmsquic
-
-  # AI
-  ollama
 
   # Python 3 support
   uv
@@ -77,9 +82,11 @@ in with pkgs; [
     pyzmq
     scikit-learn
     scipy
+    pillow
     tabulate
     tkinter
     trezor
     pyyaml
+    faster-whisper  # Local speech-to-text with word-level timestamps (CTranslate2)
   ]))
-]
+] ++ llamas  # ollama, llama-cpp
