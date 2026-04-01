@@ -8,12 +8,12 @@ To use this, import it in your env.nix file:
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  # nixpkgs-unstable 2026-03-05: ollama 0.17.4
+  # nixpkgs-unstable 2026-03-23: ollama 0.18.2
   ollamaPkgs = import (pkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "917fec990948658ef1ccd07cef2a1ef060786846";
-    sha256 = "sha256-au/m3+EuBLoSzWUCb64a/MZq6QUtOV8oC0D9tY2scPQ=";
+    rev = "fdc7b8f7b30fdbedec91b71ed82f36e1637483ed";
+    sha256 = "sha256-a++tZ1RQsDb1I0NHrFwdGuRlR5TORvCEUksM459wKUA=";
   }) {};
 
 in [
