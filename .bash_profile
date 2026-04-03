@@ -85,3 +85,5 @@ export PATH=$HOME/.node_global/bin:$PATH
 
 # Puppeteer/mermaid-cli: Use chromium from Nix profile
 export PUPPETEER_EXECUTABLE_PATH=$HOME/.nix-profile/bin/google-chrome-stable
+
+export OLLAMA_LIBRARY_PATH="$HOME/.nix-profile/lib/ollama"
