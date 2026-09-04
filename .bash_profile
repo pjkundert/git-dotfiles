@@ -94,4 +94,4 @@ export OLLAMA_LOAD_TIMEOUT=-1
 
 # Already handled, above
 #if [ -e /home/perry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/perry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-NIX_REMOTE=daemon
+export NIX_REMOTE=daemon
