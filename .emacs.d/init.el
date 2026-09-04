@@ -96,6 +96,8 @@
         '("bcf" "blg" "fdb_latexmk" "fls" "figlist" "idx"
           "log" "nav" "out" "ptc" "run.xml" "snm" "vrb" "xdv"))
   (setq org-latex-remove-logfiles t))
+;; Support SVG
+;;(setq org-latex-create-formula-image-program 'dvisvgm)
 
 (defun org-dblock-write:weekly (params)
   (cl-flet ((fmttm (tm) (format-time-string (org-time-stamp-format t t) tm))
@@ -268,7 +270,13 @@ so that you needn't enable it manually.
  '(custom-enabled-themes '(wheatgrass))
  '(fill-column 100)
  '(org-safe-remote-resources
-   '("\\`https://images\\.squarespace-cdn\\.com/content/v1/672b6c56614b43553d18558a/a3db695b-8a96-40a2-88c1-cdb2a5a7b8cb/vantage-engineering_logo_3-colour_RGB\\.png\\'"))
+   '("\\`https://img\\.shields\\.io/github/LocalWebAuthn/LocalWebAuthn/actions/workflows/ci\\.yml/badge\\.png\\'"
+     "\\`https://raster\\.shields\\.io/github/LocalWebAuthn/LocalWebAuthn/actions/workflows/ci\\.yml/badge\\.png\\'"
+     "\\`https://img\\.shields\\.io/github/license/LocalWebAuthn/LocalWebAuthn\\.png\\'"
+     "\\`https://github\\.com/LocalWebAuthn/LocalWebAuthn/actions/workflows/ci\\.yml/badge\\.png\\'"
+     "\\`https://img\\.shields\\.io/github/license/LocalWebAuthn/LocalWebAuthn\\.svg\\'"
+     "\\`https://github\\.com/LocalWebAuthn/LocalWebAuthn/actions/workflows/ci\\.yml/badge\\.svg\\'"
+     "\\`https://images\\.squarespace-cdn\\.com/content/v1/672b6c56614b43553d18558a/a3db695b-8a96-40a2-88c1-cdb2a5a7b8cb/vantage-engineering_logo_3-colour_RGB\\.png\\'"))
  '(package-selected-packages
    '(company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf
 	     solidity-mode)))

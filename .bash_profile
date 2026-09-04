@@ -87,3 +87,7 @@ export PATH=$HOME/.node_global/bin:$PATH
 export PUPPETEER_EXECUTABLE_PATH=$HOME/.nix-profile/bin/google-chrome-stable
 
 export OLLAMA_LIBRARY_PATH="$HOME/.nix-profile/lib/ollama"
+export OLLAMA_KEEP_ALIVE=-1
+export OLLAMA_LOAD_TIMEOUT=-1
+
+[[ -r ~/.bashrc ]] && source ~/.bashrc

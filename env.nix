@@ -1,7 +1,7 @@
 let
   pkgs = import <nixpkgs> {};
   emacs = import ./env-emacs.nix { inherit pkgs; };
-  llamas = import ./env-ollama.nix { inherit pkgs; };  # now returns { packages, mlxLibPath }
+  llamas = import ./env-ollama.nix { inherit pkgs; };
   tex = (pkgs.texlive.combine {
     inherit (pkgs.texlive) scheme-full
       dvisvgm dvipng # for preview and export as html
@@ -10,21 +10,7 @@ let
       #(setq org-preview-latex-default-process 'dvisvgm)
   });
 
-  # Check OLLAMA_LIBRARY_PATH at eval time; builtins.trace prints to stderr
-  # and returns its second argument, so it's a no-op when the var is set.
-  ollamaLibPath = builtins.getEnv "OLLAMA_LIBRARY_PATH";
-
-in with pkgs;
-  (if ollamaLibPath == ""
-   then builtins.trace ''
-
-  ┌─────────────────────────────────────────────────────────┐
-  │  REMINDER: OLLAMA_LIBRARY_PATH is not set.              │
-  │  Ollama cannot find the MLX Metal libraries without it. │
-  │  Add to ~/.bashrc or ~/.zshrc:                          │
-  │    export OLLAMA_LIBRARY_PATH="$HOME/.nix-profile/lib/ollama" │
-  └─────────────────────────────────────────────────────────┘''
-   else (x: x)) [
+in with pkgs; [
   # Editors and basic dependencies
   bash
   bash-completion
@@ -51,6 +37,7 @@ in with pkgs;
   screen
   multitail
   pstree
+  xz
 
   # Project tools
   socat         # for RS-485 serial I/O testing
@@ -80,7 +67,7 @@ in with pkgs;
 
   # Python 3 support
   uv
-  (python3.withPackages (ps: with ps; [
+  (python313.withPackages (ps: with ps; [
     ipykernel
     ipython
     # jupyter_client
@@ -103,4 +90,4 @@ in with pkgs;
     pyyaml
     faster-whisper  # Local speech-to-text with word-level timestamps (CTranslate2)
   ]))
-] ++ llamas.packages  # ollama, llama-cpp, ollama-mlx-libs
+] #  ++ llamas.packages  # ollama, llama-cpp
