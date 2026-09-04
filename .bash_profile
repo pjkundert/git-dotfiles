@@ -58,11 +58,21 @@ if [[ -d "/Applications/Docker.app/Contents/Resources" ]]; then
     export PATH="/Applications/Docker.app/Contents/Resources/bin/:/Applications/Docker.app/Contents/Resources/cli-plugins/:$PATH";
 fi
 
-# Support Nix in multi-user and (optionally) individual installations
+# Support Nix in multi-user and (optionally) individual installations; run the first one found.  However,
+# if we've somehow re-read /etc/profile, it's wiped out any prior Nix configuration: Make sure
+# we re-process the Nix
+if [ -n "${__ETC_PROFILE_NIX_SOURCED:-}" ] \
+       && [[ ":$PATH:" != *":/nix/var/nix/profiles/default/bin:"* ]] \
+       && [[ ":$PATH:" != *":/$HOME/.nix-profile/bin:"* ]]; then
+    # No evidence of having run Nix config!  Must have started PATH from scratch
+    unset __ETC_PROFILE_NIX_SOURCED
+fi
 for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
               "$HOME/.nix-profile/etc/profile.d/nix.sh"; do
     if [ -f "$script" ]; then
+	#echo "Before sourcing $script: PATH=$PATH"
 	. "$script"
+	#echo "After  sourcing $script: PATH=$PATH"
 	break
     fi
 done
@@ -92,6 +102,6 @@ export OLLAMA_LOAD_TIMEOUT=-1
 
 [[ -r ~/.bashrc ]] && source ~/.bashrc
 
-# Already handled, above
+# Already handled, above, for both single-user and shared Nix installations:
 #if [ -e /home/perry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/perry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_REMOTE=daemon
