@@ -67,7 +67,7 @@ in with pkgs; [
 
   # Python 3 support
   uv
-  (python313.withPackages (ps: with ps; [
+  (python3.withPackages (ps: with ps; [
     ipykernel
     ipython
     # jupyter_client
