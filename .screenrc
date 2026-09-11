@@ -30,9 +30,6 @@ screen -t BUCKy		10 bash -ilc 'make -C ~/src/perry-kundert-ca nix-bucky-mlx'
 # Tunnelled as bucksim.kundert.ca (path ^/http/ -> 8798, else -> 8797).
 screen -t BuckSim	11 bash -ilc 'make -C ~/src/alberta-buck nix-venv-sim-server'
 
-# The Vantage Pulse
-screen -t Pulse		12 bash -ilc 'make -C ~/src/Vantage/Pulse-prod nix-start PULSE_ENV=production'
-
 # Start up the Lightning Watch ingest/serve
 screen -t L.Ingest	13 bash -ilc 'sleep 1; make -C ~/src/Vantage/1885-Create-DevOps/lightning_watch nix-venv-ingest'
 screen -t L.Serve	14 bash -ilc 'sleep 9; make -C ~/src/Vantage/1885-Create-DevOps/lightning_watch nix-venv-serve'

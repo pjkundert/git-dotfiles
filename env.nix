@@ -89,5 +89,6 @@ in with pkgs; [
     trezor
     pyyaml
     faster-whisper  # Local speech-to-text with word-level timestamps (CTranslate2)
+    cloudflare      # cf CLI
   ]))
 ] #  ++ llamas.packages  # ollama, llama-cpp
