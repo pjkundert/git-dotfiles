@@ -105,3 +105,10 @@ export OLLAMA_LOAD_TIMEOUT=-1
 # Already handled, above, for both single-user and shared Nix installations:
 #if [ -e /home/perry/.nix-profile/etc/profile.d/nix.sh ]; then . /home/perry/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 export NIX_REMOTE=daemon
+
+# >>> Magnitude CLI PATH >>>
+[[ -d $HOME/.magnitude/bin ]] && case "$PATH" in
+  "$HOME/.magnitude/bin"|"$HOME/.magnitude/bin":*) ;;
+  *) export PATH="$HOME/.magnitude/bin:$PATH" ;;
+esac
+# <<< Magnitude CLI PATH <<<

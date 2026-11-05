@@ -141,3 +141,10 @@ export PATH=/Users/perry/.opencode/bin:$PATH
 export PATH="$HOME/.grok/bin:$PATH"
 [[ -r "$HOME/.grok/completions/bash/grok.bash" ]] && source "$HOME/.grok/completions/bash/grok.bash"
 # <<< grok installer <<<
+
+# >>> Magnitude CLI PATH >>>
+#case "$PATH" in
+#  "$HOME/.magnitude/bin"|"$HOME/.magnitude/bin":*) ;;
+#  *) export PATH="$HOME/.magnitude/bin:$PATH" ;;
+#esac
+# <<< Magnitude CLI PATH <<<

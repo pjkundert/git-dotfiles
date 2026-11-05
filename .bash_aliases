@@ -21,3 +21,4 @@ alias claude-qwen3-coder-next='ANTHROPIC_BASE_URL=http://localhost:8000 ANTHROPI
 
 
 alias claude-work='CLAUDE_CONFIG_DIR=~/.claude-work command claude'
+alias gstat='git status'

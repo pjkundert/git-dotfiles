@@ -153,6 +153,9 @@
 (use-package ob-go
   :ensure t)
 
+;;(use-package ob-js
+;;  :ensure t)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((ditaa . t)
@@ -160,6 +163,7 @@
    (python . t)
    (jupyter . t)
    (go . t)
+   (js . t)
    ))
 
 (setq org-ditaa-jar-path "~/.nix-profile/lib/ditaa.jar")
@@ -278,8 +282,8 @@ so that you needn't enable it manually.
      "\\`https://github\\.com/LocalWebAuthn/LocalWebAuthn/actions/workflows/ci\\.yml/badge\\.svg\\'"
      "\\`https://images\\.squarespace-cdn\\.com/content/v1/672b6c56614b43553d18558a/a3db695b-8a96-40a2-88c1-cdb2a5a7b8cb/vantage-engineering_logo_3-colour_RGB\\.png\\'"))
  '(package-selected-packages
-   '(company go-mode htmlize jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf
-	     solidity-mode)))
+   '(company go-mode jupyter lsp-mode magit nix-mode ob-go ob-mermaid org-inline-pdf org-ref powershell
+	     rustic solidity-mode)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

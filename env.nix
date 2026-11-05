@@ -27,7 +27,7 @@ in with pkgs; [
 
   # Development tools
   cacert
-  git
+  git git-lfs
   #gitSVN subversion svn2git
   git-credential-manager # git-filter-repo
   gnumake
@@ -48,6 +48,7 @@ in with pkgs; [
   diffutils     # GNU diff, etc.
   wakeonlan
   cloudflared
+  age           # encrypted backups
 
   # Image manipulation
   imagemagick   # for image conversion (SVG to PNG, etc.)
@@ -57,7 +58,8 @@ in with pkgs; [
   ghostscript
 
   # Javascript tools; Claude code, etc.
-  nodejs_20     # Not a bleeding-edge version
+  #nodejs_20     # Not a bleeding-edge version
+  nodejs_22     # a bleeding-edge version
   ripgrep
 
   # C# Tools, QUIC protocol implementation.  Fragile...
