@@ -33,7 +33,7 @@ in with pkgs; [
   gnumake
   cmake
   jq yq
-  openssh
+  openssh rsync nssmdns   # ssh and rsync, and mDNS libnss_mdns_minimal.so.2, etc.
   screen
   multitail
   pstree

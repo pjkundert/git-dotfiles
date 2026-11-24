@@ -77,6 +77,10 @@ for script in "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" \
     fi
 done
 
+# We want all Nix-supplied programs to respond to mDNS name resolution
+# Allow Nix glibc to find NSS modules installed in the Nix profile.
+export LD_LIBRARY_PATH="$HOME/.nix-profile/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
 # If we're running a version of bash capable of it, use bash-completions.  Otherwise, prompt
 # to change shell to Nix environment supplied version.
 if [[ -z "${BASH_VERSION%%5*}" && -r "$HOME/.nix-profile/share/bash-completion/bash_completion" ]]; then
